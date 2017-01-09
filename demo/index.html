@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pop demo</title>
+    <link rel="stylesheet" href="style/pop.css">
+    <style>
+        .demos{width:888px;margin:0 auto}
+        .demos h2{text-align: center;clear: both;color:#999;padding-top:40px}
+        .demos a{display: block;text-align: center;background: #ddd;margin: 10px;width: 200px;line-height: 2em;border-radius: 5px;border:1px solid #ddd;float: left;text-decoration: none; color: #fff}
+        #custom{background: #fff;position: absolute;top: 30%;left: 40%;width: 20%;z-index: 1001;display: none}
+        #custom p{text-align: center}
+    </style>
+</head>
+<body>
+    <div class="demos">
+        <h2>alert</h2>
+        <a href="javascript:void(0)" class="alert1">普通弹框</a>
+        <a href="javascript:void(0)" class="alert2">定义标题、按钮文字 弹框</a>
+        <a href="javascript:void(0)" class="alert3">弹框按钮事件</a>
+        <a href="javascript:void(0)" class="alert4">遮罩层执行按钮事件</a>
+        <h2>config</h2>
+        <a href="javascript:void(0)" class="config1">确认框</a>
+        <a href="javascript:void(0)" class="config2">遮罩层执行确认按钮事件</a>
+        <a href="javascript:void(0)" class="config3">自定义按钮</a>
+        <a href="javascript:void(0)" class="config4">输入框</a>
+        <h2>其他</h2>
+        <a href="javascript:void(0)" class="loading">loading</a>
+        <a href="javascript:void(0)" class="custom">自定义显示框</a>
+    </div>
+<div id="custom">
+    <p></p>
+    <p>自定义显示框内容自定义显示框内容</p>
+    <p>自定义显示框内容自定义显示框内容</p>
+    <p>自定义显示框内容</p>
+    <p><a href="javascript:void(0)" onclick="pop.close()">关闭按钮</a></p>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/pop.js"></script>
+<script>
+    $(document).on('click', '.alert1', function () {
+        pop.alert('提示文字');
+    }).on('click', '.alert2', function () {
+        pop.alert({
+            t1: '提示标题',
+            t2: '提示文字',
+            btnTxt: '按钮文字'
+        });
+    }).on('click', '.alert3', function () {
+        pop.alert({
+            t1: '提示标题',
+            t2: '提示文字',
+            onBtnOk: function (e) {
+                alert('点击事件');
+                console.log(e);
+            }
+        });
+    }).on('click', '.alert4', function () {
+        pop.alert({
+            t1: '提示标题',
+            t2: '提示文字',
+            onBtnOk: function (e) {
+                alert('点击事件');
+                console.log(e);
+            },
+            onBgCallback: true
+        });
+    }).on('click', '.config1', function () {
+        pop.confirm({
+            t1: '警告！',
+            t2: '是否确认关闭弹框？',
+            btnTxtOk: '是的',
+            btnTxtClose: '取消',
+            onBtnOk: function (e) {
+                alert('确认按钮事件');
+                console.log(e);
+            }
+        });
+    }).on('click', '.config2', function () {
+        pop.confirm({
+            t1: '警告！',
+            t2: '是否确认关闭弹框？',
+            btnTxtOk: '是的',
+            btnTxtClose: '取消',
+            onBgCallback: true,
+            onBtnOk: function (e) {
+                alert('确认按钮事件');
+                console.log(e);
+            }
+        });
+    }).on('click', '.config3', function () {
+        pop.confirm({
+            t2: '自定义事件',
+            btnTxtOk: '事件1',
+            btnTxtClose: '事件2',
+            onBtnOk: function (e) {
+                alert('事件1');
+                console.log(e);
+            },
+            onBtnClose: function (e) {
+                alert('事件2');
+                console.log(e);
+            }
+        });
+    }).on('click', '.config4', function () {
+        var form = '<p><label>名字：</label><input type="text" class="name"></p>';
+        form += '<p><label>职业：</label><input type="text" class="occupation"></p>';
+        pop.confirm({
+            t2: form,
+            btnTxtOk: '提交',
+            btnTxtClose: '取消',
+            onBtnOk: function (e) {
+                alert(e.find('.name').val() + '\n' + e.find('.occupation').val());
+                console.log(e);
+            }
+        });
+    }).on('click', '.loading', function () {
+        pop.loading();
+    }).on('click', '.custom', function () {
+        pop.show('custom');
+    });
+</script>
+</body>
+</html>
