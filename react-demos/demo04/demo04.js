@@ -1,17 +1,17 @@
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
 
-var input = React.createElement('input');
+// var HelloMessage = <div>Hello, jony</div>
 
-console.log(input);
+class HelloMessage extends React.Component{
+    render() {
+        return <h1>Hello, {this.props.name}</h1>;
+    }
+}
 
-// var HelloMessage = React.createElement({
-//     render: () => {
-//         return <div>Hello, {this.props.name}</div>;
-//     }
-// })
+console.log(HelloMessage)
 
-// render(
-//     <HelloMessage name="john" />,
-//     document.getElementById('app')
-// )
+ReactDOM.render(
+    <HelloMessage name="jony" />,
+    document.getElementById('app')
+)

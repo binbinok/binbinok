@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 53);
+/******/ 	return __webpack_require__(__webpack_require__.s = 57);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -20368,11 +20368,17 @@ assign:k}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default?Z.default:Z;
 /* 50 */,
 /* 51 */,
 /* 52 */,
-/* 53 */
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(5);
 
@@ -20382,10 +20388,74 @@ var _reactDom = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NotesList = function (_React$Component) {
+    _inherits(NotesList, _React$Component);
+
+    function NotesList() {
+        _classCallCheck(this, NotesList);
+
+        return _possibleConstructorReturn(this, (NotesList.__proto__ || Object.getPrototypeOf(NotesList)).apply(this, arguments));
+    }
+
+    _createClass(NotesList, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'ol',
+                null,
+                _react2.default.Children.map(this.props.children, function (child) {
+                    return _react2.default.createElement(
+                        'li',
+                        null,
+                        child
+                    );
+                })
+            );
+        }
+    }]);
+
+    return NotesList;
+}(_react2.default.Component);
+
 (0, _reactDom.render)(_react2.default.createElement(
-    'div',
+    NotesList,
     null,
-    'Hello React!'
+    _react2.default.createElement(
+        'span',
+        null,
+        'list1'
+    ),
+    _react2.default.createElement(
+        'span',
+        null,
+        'list2'
+    ),
+    _react2.default.createElement(
+        'span',
+        null,
+        'list3'
+    ),
+    _react2.default.createElement(
+        'span',
+        null,
+        'list4'
+    ),
+    _react2.default.createElement(
+        'span',
+        null,
+        'list5'
+    ),
+    _react2.default.createElement(
+        'span',
+        null,
+        'list6'
+    )
 ), document.getElementById('app'));
 
 /***/ })

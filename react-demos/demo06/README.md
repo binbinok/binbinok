@@ -1,0 +1,1 @@
+### 从 `React v15.5` 开始，`React.PropTypes` 助手函数已被弃用，需要引用`prop-types`库 来定义`contextTypes`。[参考](http://www.css88.com/react/docs/typechecking-with-proptypes.html)
