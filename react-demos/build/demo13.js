@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 56);
+/******/ 	return __webpack_require__(__webpack_require__.s = 65);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -507,7 +507,7 @@ if (process.env.NODE_ENV === 'production') {
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(14);
+  var ReactPropTypesSecret = __webpack_require__(13);
   var loggedTypeFailures = {};
 
   printWarning = function(text) {
@@ -900,8 +900,7 @@ if (process.env.NODE_ENV === 'production') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 13 */,
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -920,6 +919,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
+/* 14 */,
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20371,13 +20371,20 @@ assign:k}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default?Z.default:Z;
 /* 53 */,
 /* 54 */,
 /* 55 */,
-/* 56 */
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(5);
 
@@ -20389,41 +20396,59 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function formatDate(date) {
+    return date.toLocaleDateString();
+}
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function Avatar(props) {
+    console.log(1, props);
+    return _react2.default.createElement('img', { className: 'Avatar', src: props.user.avatarUrl, alt: props.user.name });
+}
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function UserInfo(props) {
+    var user = props.user;
+    return _react2.default.createElement(
+        'div',
+        { id: 'UserInfo' },
+        _react2.default.createElement(Avatar, { user: user }),
+        _react2.default.createElement(
+            'div',
+            { className: 'UserInfo-name' },
+            user.name
+        )
+    );
+}
 
-// var HelloMessage = <div>Hello, jony</div>
+function Comment(props) {
+    return _react2.default.createElement(
+        'div',
+        { className: 'Comment' },
+        _react2.default.createElement(UserInfo, { user: props.author }),
+        _react2.default.createElement(
+            'div',
+            { className: 'Comment-text' },
+            props.text
+        ),
+        _react2.default.createElement(
+            'div',
+            { className: 'Comment-date' },
+            formatDate(props.date)
+        )
+    );
+}
 
-var HelloMessage = function (_React$Component) {
-    _inherits(HelloMessage, _React$Component);
-
-    function HelloMessage() {
-        _classCallCheck(this, HelloMessage);
-
-        return _possibleConstructorReturn(this, (HelloMessage.__proto__ || Object.getPrototypeOf(HelloMessage)).apply(this, arguments));
+var comment = {
+    date: new Date(),
+    text: 'I hope you enjoy learning React!',
+    author: {
+        name: 'Hello Kitty',
+        avatarUrl: 'http://placekitten.com/g/64/64'
     }
-
-    _createClass(HelloMessage, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'h1',
-                null,
-                'Hello, ',
-                this.props.name
-            );
-        }
-    }]);
-
-    return HelloMessage;
-}(_react2.default.Component);
-
-console.log(HelloMessage);
-
-_reactDom2.default.render(_react2.default.createElement(HelloMessage, { name: 'jony' }), document.getElementById('app'));
+};
+_reactDom2.default.render(_react2.default.createElement(Comment, {
+    date: comment.date,
+    text: comment.text,
+    author: comment.author }), document.getElementById('root'));
 
 /***/ })
 /******/ ]);
