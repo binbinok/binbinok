@@ -16,7 +16,7 @@ class LoginInfo extends React.Component {
         let isLoggedIn = this.state.isLoggedIn;
         return (
             <div>
-                <button onClick={this.loginToggle.bind(this)}>{isLoggedIn ? 'logout' : 'login'}</button>
+                <button onClick={this.loginToggle.bind(this)}>{isLoggedIn ? 'hide' : 'show'}</button>
                 {
                     isLoggedIn ? <h1>show box</h1> : null
                 }

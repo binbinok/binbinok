@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 68);
+/******/ 	return __webpack_require__(__webpack_require__.s = 69);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -20383,7 +20383,8 @@ assign:k}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default?Z.default:Z;
 /* 65 */,
 /* 66 */,
 /* 67 */,
-/* 68 */
+/* 68 */,
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20405,48 +20406,137 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LoginInfo = function (_React$Component) {
-    _inherits(LoginInfo, _React$Component);
+var scaleNames = {
+    c: 'Celsius',
+    f: 'Fahrenheit'
+};
 
-    function LoginInfo(props) {
-        _classCallCheck(this, LoginInfo);
+function BoilingVerdict(props) {
+    if (props.celsius >= 100) {
+        return _react2.default.createElement(
+            'p',
+            null,
+            'The water would boil.'
+        );
+    }
+    return _react2.default.createElement(
+        'p',
+        null,
+        'The water would not boil.'
+    );
+}
 
-        var _this = _possibleConstructorReturn(this, (LoginInfo.__proto__ || Object.getPrototypeOf(LoginInfo)).call(this, props));
+function toCelsius(fahrenheit) {
+    return (fahrenheit - 32) * 5 / 9;
+}
 
-        _this.state = { isLoggedIn: false };
+function toFahrenheit(celsius) {
+    return celsius * 9 / 5 + 32;
+}
+
+function tryConvert(temperature, convert) {
+    var input = parseFloat(temperature);
+    if (Number.isNaN(input)) {
+        return '';
+    }
+    var output = convert(input);
+    var rounded = Math.round(output * 1000) / 1000;
+    return rounded.toString();
+}
+
+var TemperatureInput = function (_Component) {
+    _inherits(TemperatureInput, _Component);
+
+    function TemperatureInput(props) {
+        _classCallCheck(this, TemperatureInput);
+
+        var _this = _possibleConstructorReturn(this, (TemperatureInput.__proto__ || Object.getPrototypeOf(TemperatureInput)).call(this, props));
+
+        _this.state = { temperature: '' };
+
+        _this.handleChange = _this.handleChange.bind(_this);
         return _this;
     }
 
-    _createClass(LoginInfo, [{
-        key: "loginToggle",
-        value: function loginToggle() {
-            this.setState({ isLoggedIn: !this.state.isLoggedIn });
+    _createClass(TemperatureInput, [{
+        key: 'handleChange',
+        value: function handleChange(e) {
+            // this.setState({temperature: e.target.value});
+            this.props.onTemperatureChange(e.target.value);
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
-            var isLoggedIn = this.state.isLoggedIn;
+            // const temperature = this.state.temperature;
+            var _props = this.props,
+                temperature = _props.temperature,
+                scale = _props.scale;
+
+            console.log(1111, scaleNames, scale, scaleNames[scale]);
             return _react2.default.createElement(
-                "div",
+                'fieldset',
                 null,
                 _react2.default.createElement(
-                    "button",
-                    { onClick: this.loginToggle.bind(this) },
-                    isLoggedIn ? 'hide' : 'show'
-                ),
-                isLoggedIn ? _react2.default.createElement(
-                    "h1",
+                    'legend',
                     null,
-                    "show box"
-                ) : null
+                    'Enter temperature in ',
+                    scaleNames[scale],
+                    ':'
+                ),
+                _react2.default.createElement('input', { value: temperature, onChange: this.handleChange })
             );
         }
     }]);
 
-    return LoginInfo;
-}(_react2.default.Component);
+    return TemperatureInput;
+}(_react.Component);
 
-(0, _reactDom.render)(_react2.default.createElement(LoginInfo, null), document.getElementById('app'));
+var Calculator = function (_Component2) {
+    _inherits(Calculator, _Component2);
+
+    function Calculator(props) {
+        _classCallCheck(this, Calculator);
+
+        var _this2 = _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
+
+        _this2.state = { temperature: '', scale: 'c' };
+
+        _this2.handleCelsiusChange = _this2.handleCelsiusChange.bind(_this2);
+        _this2.handleFahrenheitChange = _this2.handleFahrenheitChange.bind(_this2);
+        return _this2;
+    }
+
+    _createClass(Calculator, [{
+        key: 'handleCelsiusChange',
+        value: function handleCelsiusChange(temperature) {
+            this.setState({ scale: 'c', temperature: temperature });
+        }
+    }, {
+        key: 'handleFahrenheitChange',
+        value: function handleFahrenheitChange(temperature) {
+            this.setState({ scale: 'f', temperature: temperature });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var scale = this.state.scale;
+            var temperature = this.state.temperature;
+            var celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
+            var fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(TemperatureInput, { temperature: celsius, onTemperatureChange: this.handleCelsiusChange }),
+                _react2.default.createElement(TemperatureInput, { temperature: fahrenheit, onTemperatureChange: this.handleFahrenheitChange }),
+                _react2.default.createElement(BoilingVerdict, { celsius: parseFloat(celsius) })
+            );
+        }
+    }]);
+
+    return Calculator;
+}(_react.Component);
+
+(0, _reactDom.render)(_react2.default.createElement(Calculator, null), document.getElementById('root'));
 
 /***/ })
 /******/ ]);
