@@ -1,0 +1,10 @@
+{
+    "refuelList": [
+        {
+            "price": 6.38,
+            "mileage": 1174,
+            "total": 85,
+            "type": 92
+        }   
+    ]
+}
